@@ -3,6 +3,6 @@ body {
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00b7ff;
+body {
+  background-color: rgb(238, 234, 234);
 }
