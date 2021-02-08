@@ -7,17 +7,17 @@ const DroneModel = require("../models/Drone.model.js");
 router.get(
 	"/drones", 
 	(req, res, next) => {
-  	// Iteration #2: List the drones
-  	DroneModel.find()
-    	.then(
+		// Iteration #2: List the drones
+		DroneModel.find()
+			.then(
 				(drones) => {
-      		res.render("drones/list.hbs", { drones });
-    		}
+					res.render("drones/list.hbs", { drones });
+				}
 			)
-    	.catch(
+			.catch(
 				(err) => {
-      		console.log("Finding failed", err);
-    		}
+					console.log("Finding failed", err);
+				}
 			);
 	}
 );
@@ -25,31 +25,31 @@ router.get(
 router.get(
 	"/drones/create", 
 	(req, res, next) => {
-  	// Iteration #3: Add a new drone
-  	res.render("drones/create-form.hbs");
+  		// Iteration #3: Add a new drone
+  		res.render("drones/create-form.hbs");
 	}
 );
 
 router.post(
 	"/drones/create", 
 	(req, res, next) => {
-  	// Iteration #3: Add a new drone
-  	const { name, propellers, maxSpeed } = req.body;
+		// Iteration #3: Add a new drone
+		const { name, propellers, maxSpeed } = req.body;
 		let newDrone = {
-    	name,
-    	propellers,
-    	maxSpeed
-  	}
-	  DroneModel.create(newDrone)
-  	  .then(
+			name,
+			propellers,
+			maxSpeed
+		}
+		DroneModel.create(newDrone)
+			.then(
 				() => {
-    	  	res.redirect("/drones");
-    		}
+					res.redirect("/drones");
+				}
 			)
-    	.catch(
+			.catch(
 				(err) => {
-      		console.log("Adding is failed", err);
-    		}
+					console.log("Adding is failed", err);
+				}
 			);
 	}
 );
@@ -57,18 +57,18 @@ router.post(
 router.get(
 	"/drones/:id/edit", 
 	(req, res, next) => {
-  	// Iteration #4: Update the drone
-	  let id = req.params.id;
-	  DroneModel.findById(id)
-  	  .then(
+  		// Iteration #4: Update the drone
+		let id = req.params.id;
+		DroneModel.findById(id)
+			.then(
 				(drone) => {
-    	  	res.render("drones/update-form", { drone });
-    		}
+					res.render("drones/update-form", { drone });
+				}
 			)
-    	.catch(
+			.catch(
 				(err) => {
-      		console.log("finding by id failed", err);
-    		}
+					console.log("finding by id failed", err);
+				}		
 			);
 	}
 );
@@ -76,27 +76,27 @@ router.get(
 router.post(
 	"/drones/:id/edit", 
 	(req, res, next) => {
-  	// Iteration #4: Update the drone
-  	let id = req.params.id;
+		// Iteration #4: Update the drone
+		let id = req.params.id;
 		const { name, propellers, maxSpeed } = req.body;
 		let editedDrone = {
-	    name,
-  	  propellers,
-    	maxSpeed
-	  }
-	 	DroneModel.findByIdAndUpdate(id, editedDrone)
-    	.then(
+			name,
+			propellers,
+			maxSpeed
+		}
+		DroneModel.findByIdAndUpdate(id, editedDrone)
+			.then(
 				() => {
-      		res.redirect("/drones");
-    		}
+					res.redirect("/drones");
+				}
 			)
-    	.catch(
+			.catch(
 				(err) => {
-      		console.log(err);
-		      // we are not sure about this, please give feedback
-    		  // res.render("drones/update-form", { editedDrone });
-      		res.redirect(`/drones/${id}/edit`);
-    		}
+					console.log(err);
+					// we are not sure about this, please give feedback
+					// res.render("drones/update-form", { editedDrone });
+					res.redirect(`/drones/${id}/edit`);
+				}
 			);
 	}
 );
@@ -104,19 +104,19 @@ router.post(
 router.post(
 	"/drones/:id/delete", 
 	(req, res, next) => {
-  	// Iteration #5: Delete the drone
-  	let id = req.params.id;
-	  DroneModel.findByIdAndDelete(id)
-  	  .then(
+		// Iteration #5: Delete the drone
+		let id = req.params.id;
+		DroneModel.findByIdAndDelete(id)
+			.then(
 				() => {
-    	  	console.log("Deletion successful");
-      		res.redirect("/drones");
-    		}
+					console.log("Deletion successful");
+					res.redirect("/drones");
+				}
 			)
-    	.catch(
+			.catch(
 				(err) => {
-      		console.log("Deletion failed", err);
-    		}
+					console.log("Deletion failed", err);
+				}
 			);
 	}
 );
